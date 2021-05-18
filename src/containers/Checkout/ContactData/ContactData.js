@@ -23,7 +23,7 @@ class ContactData extends Component {
         const order = {
             ingredients: this.props.ingredients,
             // price is normally set up on the SERVER so that a customer cannot alter it!!!
-            price: this.props.totalPrice,
+            price: this.props.price,
             customer: {
                 name: 'Nishat',
                 address: {
@@ -38,6 +38,7 @@ class ContactData extends Component {
         axios.post('/orders.json', order)
             .then(response => {
                 this.setState({ loading: false });
+                console.log(order);
                 this.props.history.push('/');
             })
             .catch(error => {
