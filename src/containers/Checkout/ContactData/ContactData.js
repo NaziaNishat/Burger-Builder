@@ -3,18 +3,87 @@ import Button from '../../../components/UI/Button/Button';
 import classes from './ContactData.css';
 import axios from '../../../axios-orders';
 import Spinner from "../../../components/UI/Spinner/Spinner";
+import Input from '../../../components/UI/Input/Input';
 
 
 class ContactData extends Component {
     state = {
-        name: '',
-        email: '',
-        address: {
-            street: '',
-            zipCode: ''
+        orderForm: {
+            name: {
+                elementType: "input",
+                elementConfig: {
+                    type: "text",
+                    placeholder: "Name"
+                },
+                value: "",
+                validation: {
+                    required: true
+                },
+                valid: false
+            },
+            street: {
+                elementType: "input",
+                elementConfig: {
+                    type: "text",
+                    placeholder: "Street"
+                },
+                value: "",
+                validation: {
+                    required: true
+                },
+                valid: false
+            },
+            zipCode: {
+                elementType: "input",
+                elementConfig: {
+                    type: "text",
+                    placeholder: "Zipcode"
+                },
+                value: "",
+                validation: {
+                    required: true,
+                    minLength: 5,
+                    maxLength: 5
+                },
+                valid: false
+            },
+            country: {
+                elementType: "input",
+                elementConfig: {
+                    type: "text",
+                    placeholder: "Country"
+                },
+                value: "",
+                validation: {
+                    required: true
+                },
+                valid: false
+            },
+            email: {
+                elementType: "input",
+                elementConfig: {
+                    type: "email",
+                    placeholder: "Email"
+                },
+                value: "",
+                validation: {
+                    required: true
+                },
+                valid: false
+            },
+            deliveryMethod: {
+                elementType: "select",
+                elementConfig: {
+                    options: [
+                        { value: "fastest", displayValue: "Fastest" },
+                        { value: "economy", displayValue: "Economy" }
+                    ]
+                },
+                value: ""
+            }
         },
         loading: false
-    }
+    };
 
     orderHandler = (event) => {
         event.preventDefault();
@@ -23,17 +92,7 @@ class ContactData extends Component {
         const order = {
             ingredients: this.props.ingredients,
             // price is normally set up on the SERVER so that a customer cannot alter it!!!
-            price: this.props.price,
-            customer: {
-                name: 'Nishat',
-                address: {
-                    street: '123 Gorgeous View Road',
-                    zipCode: '84043',
-                    country: 'BD'
-                },
-                email: 'test@test.com'
-            },
-            deliveryMethod: 'fastest'
+            price: this.props.price
         }
         axios.post('/orders.json', order)
             .then(response => {
@@ -50,14 +109,10 @@ class ContactData extends Component {
     render() {
         let form = (
             <form>
-                <input className={classes.Input}
-                    type='text' name='name' placeholder='Your Name' />
-                <input className={classes.Input}
-                    type='text' name='email' placeholder='Your Email' />
-                <input className={classes.Input}
-                    type='text' name='street' placeholder='Street' />
-                <input className={classes.Input}
-                    type='text' name='zip' placeholder='Zip Code' />
+                <Input elementType="..." elementConfig="..." value="..."/>
+                <Input inputtype="input" type='text' name='email' placeholder='Your Email' />
+                <Input inputtype="input" type='text' name='street' placeholder='Street' />
+                <Input inputtype="input" type='text' name='zip' placeholder='Zip Code' />
                 <Button btnType='Success' clicked={this.orderHandler}>ORDER</Button>
             </form>
         );
