@@ -6,11 +6,12 @@ import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter } from 'react-router-dom';
 import { createStore } from 'redux';
 import reducer from './store/reducer';
+import { Provider } from 'react-redux';
 
 const store = createStore(reducer);
 
 const app = (
-    <Provider>
+    <Provider store={store}>
         <BrowserRouter>
             <App />
         </BrowserRouter>
