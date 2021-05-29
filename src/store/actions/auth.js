@@ -1,5 +1,5 @@
-import axios from 'axios'
-import * as actionTypes from './actionTypes'
+import axios from 'axios';
+import * as actionTypes from './actionTypes';
 
 export const authStart = () => {
     return {
@@ -12,8 +12,8 @@ export const authSuccess = (token, userId) => {
         type: actionTypes.AUTH_SUCCESS,
         idToken: token,
         userId: userId
-    }
-}
+    };
+};
 
 export const authFail = (error) => {
     return {

@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 class BurgerBuilder extends Component {
 
     state = {
-        purchasing: false,
+        purchasing: false
     }
 
     componentDidMount() {
